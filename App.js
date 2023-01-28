@@ -3,13 +3,21 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
+  const [courseGoals, setCourseGoals] = useState([]);
 
   function goalInputHandler(enteredText) {
     setEnteredGoalText(enteredText);
   }
 
+  // La funzione "addGoalHandler" utilizza la funzione "setCourseGoals"
+  // per aggiungere l'obiettivo corrente "enteredGoalText" all'array di obiettivi
+  // del corso "courseGoals". La funzione utilizza la notazione a spreading operator
+  // per creare una copia dell'array corrente e aggiungere l'obiettivo alla copia.
   function addGoalHandler() {
-    console.log(enteredGoalText);
+    setCourseGoals((currentCourseGoals) => [
+      ...currentCourseGoals,
+      enteredGoalText,
+    ]);
   }
 
   return (
@@ -23,7 +31,11 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goal...</Text>
+        {courseGoals.map((goal, i) => (
+          <View style={styles.goalItem} key={i}>
+            <Text style={styles.goalText}>{goal}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -53,5 +65,14 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: "#5e0acc",
+  },
+  goalText: {
+    color: "white",
   },
 });
