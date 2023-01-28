@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ScrollView,
+} from "react-native";
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -31,11 +38,15 @@ export default function App() {
         <Button title="Add Goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal, i) => (
-          <View style={styles.goalItem} key={i}>
-            <Text style={styles.goalText}>{goal}</Text>
-          </View>
-        ))}
+        {/* ScrollView serve quando ci serve la funzionalità di scroll, a questo link
+        un approfondimento per personalizzarlo: https://reactnative.dev/docs/scrollview */}
+        <ScrollView alwaysBounceVertical={false}>
+          {courseGoals.map((goal, i) => (
+            <View style={styles.goalItem} key={i}>
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
