@@ -54,8 +54,8 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            console.log(itemData);
-            return <GoalItem />;
+            console.log("Single Goal:", itemData);
+            return <GoalItem text={itemData.item.text} />;
           }}
           // Il codice utilizza la propietà "keyExtractor" di FlatList per specificare come vengono estratte
           // le chiavi univoche per gli elementi della lista. In questo caso, la funzione

@@ -2,12 +2,12 @@
 // In passato dovevo fare l'import di React from react ma le moderne versioni di
 // React Native consentono di non scrivere questo import
 
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
-function GoalItem() {
+function GoalItem(props) {
   return (
     <View style={styles.goalItem}>
-      <Text style={styles.goalText}>{itemData.item.text}</Text>
+      <Text style={styles.goalText}>{props.text}</Text>
     </View>
   );
 }
