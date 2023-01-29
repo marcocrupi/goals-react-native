@@ -12,6 +12,10 @@ export default function App() {
     setModalIsVisible(true);
   }
 
+  function endAddGoalHandler(params) {
+    setModalIsVisible(false);
+  }
+
   // La funzione "addGoalHandler" utilizza la funzione "setCourseGoals"
   // per aggiungere l'obiettivo corrente "enteredGoalText" all'array di obiettivi
   // del corso "courseGoals". La funzione utilizza la notazione a spreading operator
@@ -19,7 +23,6 @@ export default function App() {
   function addGoalHandler(enteredGoalText) {
     setCourseGoals((currentCourseGoals) => [
       ...currentCourseGoals,
-
       {
         text: enteredGoalText,
         // Soluzione per creare una chiave univoca, "key" che contiene il valore restituito da Date.now() combinato con Math.random().
@@ -33,6 +36,7 @@ export default function App() {
         id: Date.now() + Math.random().toString(36).substring(2, 15),
       },
     ]);
+    endAddGoalHandler();
   }
 
   function deleteGoalHandler(id) {
@@ -48,7 +52,11 @@ export default function App() {
         color="#210644"
         onPress={startAddGoalHandler}
       />
-      <GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />
+      <GoalInput
+        visible={modalIsVisible}
+        onAddGoal={addGoalHandler}
+        onCancel={endAddGoalHandler}
+      />
       <View style={styles.goalsContainer}>
         {/* ScrollView serve quando ci serve la funzionalità di scroll, a questo link
         un approfondimento per personalizzarlo: https://reactnative.dev/docs/scrollview
