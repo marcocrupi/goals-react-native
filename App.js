@@ -67,7 +67,6 @@ export default function App() {
         <FlatList
           data={courseGoals}
           renderItem={(itemData) => {
-            console.log("Single Goal:", itemData);
             return (
               <GoalItem
                 text={itemData.item.text}
